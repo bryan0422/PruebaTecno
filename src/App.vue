@@ -1,28 +1,46 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+    <div>
+      
+<img id="portada" src="https://techfactory.mx/wp-content/uploads/2019/09/Header-Techfactory.png">
+</div>
+  <b-table responsive striped hover :items="todos"></b-table>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+data(){
+  return{
+      todos:[]
+  }
+},
+  mounted(){
+      
+      this.getTodos();
+  },
+  methods:{
+  getTodos(){
+      
+      axios
+      .get('https://www.proxtopic.com/facedetection/index.php/api/getDetection')
+      .then( Response =>{
+      this.todos = Response.data
+    })
+    .catch(e=> console.log(e))
+  }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+#portada{
+  width: 100%;
+  height: auto;
+  background: black;  
+
 }
 </style>
